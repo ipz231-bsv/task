@@ -8,4 +8,3 @@ C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.cspr
 C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.exe
 C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.pdb
 C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.TicTacToe.resources
-C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.Form2.resources
