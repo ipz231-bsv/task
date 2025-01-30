@@ -98,57 +98,31 @@ namespace TicTacToe
         private Button look_for_corner()
         {
             Console.WriteLine("Looking for corner");
-            if (A1.Text == "O")
+
+            
+            Button[] corners = { A1, A3, C1, C3 };
+
+            
+            foreach (var corner in corners)
             {
-                if (A3.Text == "")
-                    return A3;
-                if (C3.Text == "")
-                    return C3;
-                if (C1.Text == "")
-                    return C1;
+                if (corner.Text == "O")
+                {
+                    
+                    if (A3.Text == "") return A3;
+                    if (C3.Text == "") return C3;
+                    if (C1.Text == "") return C1;
+                }
             }
 
-            if (A3.Text == "O")
+            
+            foreach (var corner in corners)
             {
-                if (A1.Text == "")
-                    return A1;
-                if (C3.Text == "")
-                    return C3;
-                if (C1.Text == "")
-                    return C1;
+                if (corner.Text == "") return corner;
             }
-
-            if (C3.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A3;
-                if (A3.Text == "")
-                    return A3;
-                if (C1.Text == "")
-                    return C1;
-            }
-
-            if (C1.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A3;
-                if (A3.Text == "")
-                    return A3;
-                if (C3.Text == "")
-                    return C3;
-            }
-
-            if (A1.Text == "")
-                return A1;
-            if (A3.Text == "")
-                return A3;
-            if (C1.Text == "")
-                return C1;
-            if (C3.Text == "")
-                return C3;
 
             return null;
         }
+
 
         private Button look_for_win_or_block(string mark)
         {
