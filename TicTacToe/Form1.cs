@@ -217,60 +217,74 @@ namespace TicTacToe
 
         private void CheckForWinner()
         {
-            bool there_is_a_winner = false;
-
-            // horizontal checks
-            if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled))
-                there_is_a_winner = true;
-            else if ((C1.Text == C2.Text) && (C2.Text == C3.Text) && (!C1.Enabled))
-                there_is_a_winner = true;
-
-            // vertical checks
-            else if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled))
-                there_is_a_winner = true;
-            else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))
-                there_is_a_winner = true;
-
-            // diagonal checks
-            else if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!C1.Enabled))
-                there_is_a_winner = true;
-
-            if (there_is_a_winner)
+            // Перевірка горизонтальних, вертикальних і діагональних ліній
+            if (CheckForWinningLine())
             {
+                ShowWinnerMessage();
+            }
+            else if (turn_count == 9)
+            {
+                // Якщо нічию
                 DisableButtons();
+                draw_count.Text = (int.Parse(draw_count.Text) + 1).ToString();
+                MessageBox.Show("Draw!", "Bummer!");
+                NewGame(); // Починаємо нову гру
+            }
+        }
 
-                string winner = "";
-                if (turn) // Changed condition
-                {
-                    winner = p1.Text; // Player 1 wins
-                    x_win_count.Text = (int.Parse(x_win_count.Text) + 1).ToString();
-                }
-                else
-                {
-                    winner = p2.Text; // Computer wins
-                    o_win_count.Text = (int.Parse(o_win_count.Text) + 1).ToString();
-                }
+        private bool CheckForWinningLine()
+        {
+            // Перевірка горизонтальних ліній
+            if (CheckHorizontal()) return true;
 
-                MessageBox.Show(winner + " Wins!", "Yay!");
-                NewGame();
+            // Перевірка вертикальних ліній
+            if (CheckVertical()) return true;
+
+            // Перевірка діагоналей
+            if (CheckDiagonals()) return true;
+
+            return false;
+        }
+        private bool CheckHorizontal()
+        {
+            return (A1.Text == A2.Text && A2.Text == A3.Text && !A1.Enabled && !A2.Enabled && !A3.Enabled) ||
+                   (B1.Text == B2.Text && B2.Text == B3.Text && !B1.Enabled && !B2.Enabled && !B3.Enabled) ||
+                   (C1.Text == C2.Text && C2.Text == C3.Text && !C1.Enabled && !C2.Enabled && !C3.Enabled);
+        }
+
+        // Перевірка вертикальних ліній
+        private bool CheckVertical()
+        {
+            return (A1.Text == B1.Text && B1.Text == C1.Text && !A1.Enabled && !B1.Enabled && !C1.Enabled) ||
+                   (A2.Text == B2.Text && B2.Text == C2.Text && !A2.Enabled && !B2.Enabled && !C2.Enabled) ||
+                   (A3.Text == B3.Text && B3.Text == C3.Text && !A3.Enabled && !B3.Enabled && !C3.Enabled);
+        }
+
+        // Перевірка діагоналей
+        private bool CheckDiagonals()
+        {
+            return (A1.Text == B2.Text && B2.Text == C3.Text && !A1.Enabled && !B2.Enabled && !C3.Enabled) ||
+                   (A3.Text == B2.Text && B2.Text == C1.Text && !A3.Enabled && !B2.Enabled && !C1.Enabled);
+        }
+
+        private void ShowWinnerMessage()
+        {
+            DisableButtons();
+
+            string winner = turn ? p1.Text : p2.Text; // Визначаємо переможця
+            if (turn) // Якщо хід гравця 1
+            {
+                x_win_count.Text = (int.Parse(x_win_count.Text) + 1).ToString();
             }
             else
             {
-                if (turn_count == 9)
-                {
-                    DisableButtons();
-                    draw_count.Text = (int.Parse(draw_count.Text) + 1).ToString();
-                    MessageBox.Show("Draw!", "Bummer!");
-                    NewGame();
-                }
+                o_win_count.Text = (int.Parse(o_win_count.Text) + 1).ToString();
             }
+
+            MessageBox.Show(winner + " Wins!", "Yay!");
+            NewGame(); // Починаємо нову гру
         }
+
 
         private void DisableButtons()
         {
