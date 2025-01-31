@@ -53,30 +53,14 @@ namespace TicTacToe
         }
         private void computer_make_move()
         {
-            //priority 1:  get tick tac toe
-            //priority 2:  block x tic tac toe
-            //priority 3:  go for corner space
-            //priority 4:  pick open space
+            Button move = look_for_win_or_block("O")
+                          ?? look_for_win_or_block("X")
+                          ?? look_for_corner()
+                          ?? look_for_open_space();
 
-            Button move = null;
-
-            //look for tic tac toe opportunities
-            move = look_for_win_or_block("O"); //look for win
-            if (move == null)
-            {
-                move = look_for_win_or_block("X"); //look for block
-                if (move == null)
-                {
-                    move = look_for_corner();
-                    if (move == null)
-                    {
-                        move = look_for_open_space();
-                    }//end if
-                }//end if
-            }//end if
-
-            move.PerformClick();
+            move?.PerformClick();
         }
+
 
         private Button look_for_open_space()
         {
