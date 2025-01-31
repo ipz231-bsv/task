@@ -111,65 +111,35 @@ namespace TicTacToe
         private Button look_for_win_or_block(string mark)
         {
             Console.WriteLine("Looking for win or block:  " + mark);
-            //HORIZONTAL TESTS
-            if ((A1.Text == mark) && (A2.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A2.Text == mark) && (A3.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (A3.Text == mark) && (A2.Text == ""))
-                return A2;
 
-            if ((B1.Text == mark) && (B2.Text == mark) && (B3.Text == ""))
-                return B3;
-            if ((B2.Text == mark) && (B3.Text == mark) && (B1.Text == ""))
-                return B1;
-            if ((B1.Text == mark) && (B3.Text == mark) && (B2.Text == ""))
-                return B2;
+            
+            Button[,] winPatterns = new Button[,]
+            {
+        { A1, A2, A3 }, { B1, B2, B3 }, { C1, C2, C3 },
+        { A1, B1, C1 }, { A2, B2, C2 }, { A3, B3, C3 },
+        { A1, B2, C3 }, { A3, B2, C1 } 
+            };
 
-            if ((C1.Text == mark) && (C2.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((C2.Text == mark) && (C3.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((C1.Text == mark) && (C3.Text == mark) && (C2.Text == ""))
-                return C2;
+            
+            for (int i = 0; i < winPatterns.GetLength(0); i++)
+            {
+                Button[] line = { winPatterns[i, 0], winPatterns[i, 1], winPatterns[i, 2] };
+                Button move = FindWinningMove(line, mark);
+                if (move != null) return move;
+            }
+            return null;
+        }
 
-            //VERTICAL TESTS
-            if ((A1.Text == mark) && (B1.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((B1.Text == mark) && (C1.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (C1.Text == mark) && (B1.Text == ""))
-                return B1;
+        
+        private Button FindWinningMove(Button[] line, string mark)
+        {
+            int countMark = line.Count(b => b.Text == mark);
+            int countEmpty = line.Count(b => b.Text == "");
 
-            if ((A2.Text == mark) && (B2.Text == mark) && (C2.Text == ""))
-                return C2;
-            if ((B2.Text == mark) && (C2.Text == mark) && (A2.Text == ""))
-                return A2;
-            if ((A2.Text == mark) && (C2.Text == mark) && (B2.Text == ""))
-                return B2;
-
-            if ((A3.Text == mark) && (B3.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((B3.Text == mark) && (C3.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A3.Text == mark) && (C3.Text == mark) && (B3.Text == ""))
-                return B3;
-
-            //DIAGONAL TESTS
-            if ((A1.Text == mark) && (B2.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((B2.Text == mark) && (C3.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (C3.Text == mark) && (B2.Text == ""))
-                return B2;
-
-            if ((A3.Text == mark) && (B2.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((B2.Text == mark) && (C1.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A3.Text == mark) && (C1.Text == mark) && (B2.Text == ""))
-                return B2;
-
+            if (countMark == 2 && countEmpty == 1)
+            {
+                return line.First(b => b.Text == "");
+            }
             return null;
         }
 
