@@ -131,67 +131,37 @@ namespace TicTacToe
         private Button look_for_win_or_block(string mark)
         {
             Console.WriteLine("Looking for win or block:  " + mark);
-            //HORIZONTAL TESTS
-            if ((A1.Text == mark) && (A2.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A2.Text == mark) && (A3.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (A3.Text == mark) && (A2.Text == ""))
-                return A2;
 
-            if ((B1.Text == mark) && (B2.Text == mark) && (B3.Text == ""))
-                return B3;
-            if ((B2.Text == mark) && (B3.Text == mark) && (B1.Text == ""))
-                return B1;
-            if ((B1.Text == mark) && (B3.Text == mark) && (B2.Text == ""))
-                return B2;
+            // Горизонтальні перевірки
+            Button[] buttons = { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
+            int[][] winPatterns = {
+        new int[] { 0, 1, 2 }, // A1, A2, A3
+        new int[] { 3, 4, 5 }, // B1, B2, B3
+        new int[] { 6, 7, 8 }, // C1, C2, C3
+        new int[] { 0, 3, 6 }, // A1, B1, C1
+        new int[] { 1, 4, 7 }, // A2, B2, C2
+        new int[] { 2, 5, 8 }, // A3, B3, C3
+        new int[] { 0, 4, 8 }, // A1, B2, C3
+        new int[] { 2, 4, 6 }  // A3, B2, C1
+    };
 
-            if ((C1.Text == mark) && (C2.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((C2.Text == mark) && (C3.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((C1.Text == mark) && (C3.Text == mark) && (C2.Text == ""))
-                return C2;
+            foreach (var pattern in winPatterns)
+            {
+                Button first = buttons[pattern[0]];
+                Button second = buttons[pattern[1]];
+                Button third = buttons[pattern[2]];
 
-            //VERTICAL TESTS
-            if ((A1.Text == mark) && (B1.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((B1.Text == mark) && (C1.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (C1.Text == mark) && (B1.Text == ""))
-                return B1;
-
-            if ((A2.Text == mark) && (B2.Text == mark) && (C2.Text == ""))
-                return C2;
-            if ((B2.Text == mark) && (C2.Text == mark) && (A2.Text == ""))
-                return A2;
-            if ((A2.Text == mark) && (C2.Text == mark) && (B2.Text == ""))
-                return B2;
-
-            if ((A3.Text == mark) && (B3.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((B3.Text == mark) && (C3.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A3.Text == mark) && (C3.Text == mark) && (B3.Text == ""))
-                return B3;
-
-            //DIAGONAL TESTS
-            if ((A1.Text == mark) && (B2.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((B2.Text == mark) && (C3.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (C3.Text == mark) && (B2.Text == ""))
-                return B2;
-
-            if ((A3.Text == mark) && (B2.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((B2.Text == mark) && (C1.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A3.Text == mark) && (C1.Text == mark) && (B2.Text == ""))
-                return B2;
+                if (first.Text == mark && second.Text == mark && third.Text == "")
+                    return third;
+                if (second.Text == mark && third.Text == mark && first.Text == "")
+                    return first;
+                if (first.Text == mark && third.Text == mark && second.Text == "")
+                    return second;
+            }
 
             return null;
         }
+
 
         private void CheckForWinner()
         {
