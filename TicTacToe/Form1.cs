@@ -53,7 +53,7 @@ namespace TicTacToe
         }
         private void computer_make_move()
         {
-            //priority 1:  get tick tac toe
+                //priority 1:  get tick tac toe
             //priority 2:  block x tic tac toe
             //priority 3:  go for corner space
             //priority 4:  pick open space
@@ -97,180 +97,123 @@ namespace TicTacToe
 
         private Button look_for_corner()
         {
-            Console.WriteLine("Looking for corner");
-            if (A1.Text == "O")
-            {
-                if (A3.Text == "")
-                    return A3;
-                if (C3.Text == "")
-                    return C3;
-                if (C1.Text == "")
-                    return C1;
-            }
+            // Перевірка кожного кута, якщо він порожній
+            if (A1.Text == "O" && A3.Text == "") return A3;
+            if (A1.Text == "O" && C3.Text == "") return C3;
+            if (A1.Text == "O" && C1.Text == "") return C1;
 
-            if (A3.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A1;
-                if (C3.Text == "")
-                    return C3;
-                if (C1.Text == "")
-                    return C1;
-            }
+            if (A3.Text == "O" && A1.Text == "") return A1;
+            if (A3.Text == "O" && C3.Text == "") return C3;
+            if (A3.Text == "O" && C1.Text == "") return C1;
 
-            if (C3.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A3;
-                if (A3.Text == "")
-                    return A3;
-                if (C1.Text == "")
-                    return C1;
-            }
+            if (C3.Text == "O" && A1.Text == "") return A1;
+            if (C3.Text == "O" && A3.Text == "") return A3;
+            if (C3.Text == "O" && C1.Text == "") return C1;
 
-            if (C1.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A3;
-                if (A3.Text == "")
-                    return A3;
-                if (C3.Text == "")
-                    return C3;
-            }
+            if (C1.Text == "O" && A1.Text == "") return A1;
+            if (C1.Text == "O" && A3.Text == "") return A3;
+            if (C1.Text == "O" && C3.Text == "") return C3;
 
-            if (A1.Text == "")
-                return A1;
-            if (A3.Text == "")
-                return A3;
-            if (C1.Text == "")
-                return C1;
-            if (C3.Text == "")
-                return C3;
+            // Якщо всі кути зайняті, повертаємо перший вільний
+            if (A1.Text == "") return A1;
+            if (A3.Text == "") return A3;
+            if (C1.Text == "") return C1;
+            if (C3.Text == "") return C3;
 
             return null;
         }
 
+
         private Button look_for_win_or_block(string mark)
         {
-            Console.WriteLine("Looking for win or block:  " + mark);
-            //HORIZONTAL TESTS
-            if ((A1.Text == mark) && (A2.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A2.Text == mark) && (A3.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (A3.Text == mark) && (A2.Text == ""))
-                return A2;
+            // Горизонтальні перевірки
+            Button result = CheckLine(A1, A2, A3, mark);
+            if (result != null) return result;
+            result = CheckLine(B1, B2, B3, mark);
+            if (result != null) return result;
+            result = CheckLine(C1, C2, C3, mark);
+            if (result != null) return result;
 
-            if ((B1.Text == mark) && (B2.Text == mark) && (B3.Text == ""))
-                return B3;
-            if ((B2.Text == mark) && (B3.Text == mark) && (B1.Text == ""))
-                return B1;
-            if ((B1.Text == mark) && (B3.Text == mark) && (B2.Text == ""))
-                return B2;
+            // Вертикальні перевірки
+            result = CheckLine(A1, B1, C1, mark);
+            if (result != null) return result;
+            result = CheckLine(A2, B2, C2, mark);
+            if (result != null) return result;
+            result = CheckLine(A3, B3, C3, mark);
+            if (result != null) return result;
 
-            if ((C1.Text == mark) && (C2.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((C2.Text == mark) && (C3.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((C1.Text == mark) && (C3.Text == mark) && (C2.Text == ""))
-                return C2;
-
-            //VERTICAL TESTS
-            if ((A1.Text == mark) && (B1.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((B1.Text == mark) && (C1.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (C1.Text == mark) && (B1.Text == ""))
-                return B1;
-
-            if ((A2.Text == mark) && (B2.Text == mark) && (C2.Text == ""))
-                return C2;
-            if ((B2.Text == mark) && (C2.Text == mark) && (A2.Text == ""))
-                return A2;
-            if ((A2.Text == mark) && (C2.Text == mark) && (B2.Text == ""))
-                return B2;
-
-            if ((A3.Text == mark) && (B3.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((B3.Text == mark) && (C3.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A3.Text == mark) && (C3.Text == mark) && (B3.Text == ""))
-                return B3;
-
-            //DIAGONAL TESTS
-            if ((A1.Text == mark) && (B2.Text == mark) && (C3.Text == ""))
-                return C3;
-            if ((B2.Text == mark) && (C3.Text == mark) && (A1.Text == ""))
-                return A1;
-            if ((A1.Text == mark) && (C3.Text == mark) && (B2.Text == ""))
-                return B2;
-
-            if ((A3.Text == mark) && (B2.Text == mark) && (C1.Text == ""))
-                return C1;
-            if ((B2.Text == mark) && (C1.Text == mark) && (A3.Text == ""))
-                return A3;
-            if ((A3.Text == mark) && (C1.Text == mark) && (B2.Text == ""))
-                return B2;
+            // Діагональні перевірки
+            result = CheckLine(A1, B2, C3, mark);
+            if (result != null) return result;
+            result = CheckLine(A3, B2, C1, mark);
+            if (result != null) return result;
 
             return null;
+        }
+
+        private Button CheckLine(Button b1, Button b2, Button b3, string mark)
+        {
+            if (b1.Text == mark && b2.Text == mark && b3.Text == "")
+                return b3;
+            if (b2.Text == mark && b3.Text == mark && b1.Text == "")
+                return b1;
+            if (b1.Text == mark && b3.Text == mark && b2.Text == "")
+                return b2;
+
+            return null;
+        }
+
+        private bool CheckHorizontal(Button b1, Button b2, Button b3)
+        {
+            return (b1.Text == b2.Text && b2.Text == b3.Text && !b1.Enabled);
+        }
+
+        private bool CheckVertical(Button b1, Button b2, Button b3)
+        {
+            return (b1.Text == b2.Text && b2.Text == b3.Text && !b1.Enabled);
+        }
+
+        private bool CheckDiagonal(Button b1, Button b2, Button b3)
+        {
+            return (b1.Text == b2.Text && b2.Text == b3.Text && !b1.Enabled);
         }
 
         private void CheckForWinner()
         {
             bool there_is_a_winner = false;
 
-            // horizontal checks
-            if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled))
-                there_is_a_winner = true;
-            else if ((C1.Text == C2.Text) && (C2.Text == C3.Text) && (!C1.Enabled))
-                there_is_a_winner = true;
+            // Check horizontal lines
+            if (CheckHorizontal(A1, A2, A3)) there_is_a_winner = true;
+            else if (CheckHorizontal(B1, B2, B3)) there_is_a_winner = true;
+            else if (CheckHorizontal(C1, C2, C3)) there_is_a_winner = true;
 
-            // vertical checks
-            else if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled))
-                there_is_a_winner = true;
-            else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))
-                there_is_a_winner = true;
+            // Check vertical lines
+            else if (CheckVertical(A1, B1, C1)) there_is_a_winner = true;
+            else if (CheckVertical(A2, B2, C2)) there_is_a_winner = true;
+            else if (CheckVertical(A3, B3, C3)) there_is_a_winner = true;
 
-            // diagonal checks
-            else if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!C1.Enabled))
-                there_is_a_winner = true;
+            // Check diagonals
+            else if (CheckDiagonal(A1, B2, C3)) there_is_a_winner = true;
+            else if (CheckDiagonal(A3, B2, C1)) there_is_a_winner = true;
 
             if (there_is_a_winner)
             {
                 DisableButtons();
-
-                string winner = "";
-                if (turn) // Changed condition
-                {
-                    winner = p1.Text; // Player 1 wins
-                    x_win_count.Text = (int.Parse(x_win_count.Text) + 1).ToString();
-                }
-                else
-                {
-                    winner = p2.Text; // Computer wins
-                    o_win_count.Text = (int.Parse(o_win_count.Text) + 1).ToString();
-                }
-
+                string winner = turn ? p1.Text : p2.Text;
+                if (turn) x_win_count.Text = (int.Parse(x_win_count.Text) + 1).ToString();
+                else o_win_count.Text = (int.Parse(o_win_count.Text) + 1).ToString();
                 MessageBox.Show(winner + " Wins!", "Yay!");
                 NewGame();
             }
-            else
+            else if (turn_count == 9)
             {
-                if (turn_count == 9)
-                {
-                    DisableButtons();
-                    draw_count.Text = (int.Parse(draw_count.Text) + 1).ToString();
-                    MessageBox.Show("Draw!", "Bummer!");
-                    NewGame();
-                }
+                DisableButtons();
+                draw_count.Text = (int.Parse(draw_count.Text) + 1).ToString();
+                MessageBox.Show("Draw!", "Bummer!");
+                NewGame();
             }
         }
+
 
         private void DisableButtons()
         {
