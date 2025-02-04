@@ -10,3 +10,4 @@
 [0602/134759.766:ERROR:component_installer.cc(298)] Failed to verify installation for Widevine Content Decryption Module (C:\Users\darka\AppData\Local\CEF\User Data\WidevineCdm\4.10.2710.0).: The system cannot find the path specified. (0x3)
 [0602/135001.242:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
 [0127/123341.260:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0204/161842.422:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 

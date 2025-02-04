@@ -219,58 +219,54 @@ namespace TicTacToe
         {
             bool there_is_a_winner = false;
 
-            // horizontal checks
-            if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled))
-                there_is_a_winner = true;
-            else if ((C1.Text == C2.Text) && (C2.Text == C3.Text) && (!C1.Enabled))
-                there_is_a_winner = true;
+            // horizontal, vertical, and diagonal checks
+            string[][] lines = new string[][]
+            {
+        new string[] { A1.Text, A2.Text, A3.Text },
+        new string[] { B1.Text, B2.Text, B3.Text },
+        new string[] { C1.Text, C2.Text, C3.Text },
+        new string[] { A1.Text, B1.Text, C1.Text },
+        new string[] { A2.Text, B2.Text, C2.Text },
+        new string[] { A3.Text, B3.Text, C3.Text },
+        new string[] { A1.Text, B2.Text, C3.Text },
+        new string[] { A3.Text, B2.Text, C1.Text }
+            };
 
-            // vertical checks
-            else if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled))
-                there_is_a_winner = true;
-            else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))
-                there_is_a_winner = true;
-
-            // diagonal checks
-            else if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!A1.Enabled))
-                there_is_a_winner = true;
-            else if ((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!C1.Enabled))
-                there_is_a_winner = true;
+            foreach (var line in lines)
+            {
+                if (line[0] == line[1] && line[1] == line[2] && !string.IsNullOrEmpty(line[0]))
+                {
+                    there_is_a_winner = true;
+                    break;
+                }
+            }
 
             if (there_is_a_winner)
             {
                 DisableButtons();
 
-                string winner = "";
-                if (turn) // Changed condition
+                string winner = turn ? p1.Text : p2.Text;
+                if (turn)
                 {
-                    winner = p1.Text; // Player 1 wins
                     x_win_count.Text = (int.Parse(x_win_count.Text) + 1).ToString();
                 }
                 else
                 {
-                    winner = p2.Text; // Computer wins
                     o_win_count.Text = (int.Parse(o_win_count.Text) + 1).ToString();
                 }
 
                 MessageBox.Show(winner + " Wins!", "Yay!");
                 NewGame();
             }
-            else
+            else if (turn_count == 9)
             {
-                if (turn_count == 9)
-                {
-                    DisableButtons();
-                    draw_count.Text = (int.Parse(draw_count.Text) + 1).ToString();
-                    MessageBox.Show("Draw!", "Bummer!");
-                    NewGame();
-                }
+                DisableButtons();
+                draw_count.Text = (int.Parse(draw_count.Text) + 1).ToString();
+                MessageBox.Show("Draw!", "Bummer!");
+                NewGame();
             }
         }
+
 
         private void DisableButtons()
         {
