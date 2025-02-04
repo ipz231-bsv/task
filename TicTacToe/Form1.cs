@@ -128,7 +128,6 @@ namespace TicTacToe
             return null;
         }
 
-
         private Button look_for_win_or_block(string mark)
         {
             Console.WriteLine("Looking for win or block:  " + mark);
