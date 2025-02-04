@@ -97,58 +97,37 @@ namespace TicTacToe
 
         private Button look_for_corner()
         {
-            Console.WriteLine("Looking for corner");
-            if (A1.Text == "O")
+            // Массив для кутів, що перевіряються
+            Button[] corners = { A1, A3, C1, C3 };
+
+            // Перевірка кожного кута
+            foreach (var corner in corners)
             {
-                if (A3.Text == "")
-                    return A3;
-                if (C3.Text == "")
-                    return C3;
-                if (C1.Text == "")
-                    return C1;
+                // Якщо кут є "O" і сусідній кут вільний, повертаємо цей кут
+                if (corner.Text == "O")
+                {
+                    foreach (var neighbor in corners)
+                    {
+                        if (neighbor != corner && neighbor.Text == "")
+                        {
+                            return neighbor;
+                        }
+                    }
+                }
             }
 
-            if (A3.Text == "O")
+            // Якщо всі кути зайняті, повертаємо перший вільний кут
+            foreach (var corner in corners)
             {
-                if (A1.Text == "")
-                    return A1;
-                if (C3.Text == "")
-                    return C3;
-                if (C1.Text == "")
-                    return C1;
+                if (corner.Text == "")
+                {
+                    return corner;
+                }
             }
-
-            if (C3.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A3;
-                if (A3.Text == "")
-                    return A3;
-                if (C1.Text == "")
-                    return C1;
-            }
-
-            if (C1.Text == "O")
-            {
-                if (A1.Text == "")
-                    return A3;
-                if (A3.Text == "")
-                    return A3;
-                if (C3.Text == "")
-                    return C3;
-            }
-
-            if (A1.Text == "")
-                return A1;
-            if (A3.Text == "")
-                return A3;
-            if (C1.Text == "")
-                return C1;
-            if (C3.Text == "")
-                return C3;
 
             return null;
         }
+
 
         private Button look_for_win_or_block(string mark)
         {
@@ -266,7 +245,6 @@ namespace TicTacToe
                 NewGame();
             }
         }
-
 
         private void DisableButtons()
         {
