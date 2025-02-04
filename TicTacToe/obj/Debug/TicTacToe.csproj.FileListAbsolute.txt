@@ -8,13 +8,3 @@ C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.cspr
 C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.exe
 C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.pdb
 C:\Projects\Клятий КУРСАЧ\Project\TicTacToe\obj\Debug\TicTacToe.TicTacToe.resources
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\bin\Debug\TicTacToe.exe.config
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\bin\Debug\TicTacToe.exe
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\bin\Debug\TicTacToe.pdb
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.csproj.AssemblyReference.cache
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.TicTacToe.resources
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.Properties.Resources.resources
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.csproj.GenerateResource.cache
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.csproj.CoreCompileInputs.cache
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.exe
-C:\Projects\Клятий КУРСАЧ (1)\Project\TicTacToe\obj\Debug\TicTacToe.pdb
