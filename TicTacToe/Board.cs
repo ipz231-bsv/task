@@ -9,10 +9,19 @@ namespace TicTacToe
         public Board(int size)
         {
             Cells = new Button[size, size];
-            // Ініціалізація клітинок може бути тут
         }
 
         public bool IsFull()
+        {
+            return CheckIfBoardIsFull();
+        }
+
+        public bool HasWinner()
+        {
+            return false;
+        }
+
+        private bool CheckIfBoardIsFull()
         {
             foreach (Button cell in Cells)
             {
@@ -20,12 +29,6 @@ namespace TicTacToe
                     return false;
             }
             return true;
-        }
-
-        public bool HasWinner()
-        {
-            // Перевірка, чи є переможець (цю частину треба дописати залежно від вашої логіки)
-            return false;
         }
     }
 }
